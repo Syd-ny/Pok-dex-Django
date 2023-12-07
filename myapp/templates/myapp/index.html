@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Bienvenue sur Django {{ name }} !</h1>
+    <h3> présentation des différentes catégories d'articles</h3>
+    <ul>
+        {% for article in list_articles %}
+            <li> 
+                <a href="blog/ {{article | lower}}/1/">{{article}}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
