@@ -1,12 +1,8 @@
 from django.db import models
+import random
 
 # Create your models here.
-class Person(models.Model):
-    nom = models.CharField(max_length=100)
-    email = models.EmailField(default='example@example.com')
 
-    def __str__(self):
-        return self.nom
 class Type(models.Model):
     nom = models.CharField(max_length=50)
 class Pokemon(models.Model):
@@ -21,7 +17,7 @@ class Pokemon(models.Model):
     sp_defense = models.IntegerField()
     speed = models.IntegerField()
     recovery = models.IntegerField()
-    generation = models.IntegerField()
+    generation = models.IntegerField(default=1)
     catchphrase = models.CharField(max_length=100)
 
     def __str__(self):
@@ -35,6 +31,22 @@ class User(models.Model):
 
     def __str__(self):
         return self.nom_utilisateur
+
+class PokemonInstance(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    pokemon = models.ForeignKey(Pokemon, on_delete=models.CASCADE)
+    hp = models.IntegerField()
+    attaque = models.IntegerField()
+    defense = models.IntegerField()
+    sp_attaque = models.IntegerField()
+    sp_defense = models.IntegerField()
+    speed = models.IntegerField()
+    recovery = models.IntegerField(default=1)
+
+    def __str__(self):
+        return f"{self.pokemon.nom} de {self.user.nom_utilisateur}"
+
+
 
 class Equipe(models.Model):
     nom = models.CharField(max_length=100)
