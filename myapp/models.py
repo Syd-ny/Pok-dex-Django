@@ -10,7 +10,7 @@ class Pokemon(models.Model):
     image = models.CharField(max_length=100)
     type1 = models.ForeignKey(Type, on_delete=models.SET_NULL, null=True, related_name='primary_type')
     type2 = models.ForeignKey(Type, on_delete=models.SET_NULL, null=True, blank=True, related_name='secondary_type')
-    hp = models.IntegerField()
+    hp_max = models.IntegerField()
     attaque = models.IntegerField()
     defense = models.IntegerField()
     sp_attaque = models.IntegerField()
@@ -35,13 +35,18 @@ class User(models.Model):
 class PokemonInstance(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     pokemon = models.ForeignKey(Pokemon, on_delete=models.CASCADE)
-    hp = models.IntegerField()
-    attaque = models.IntegerField()
-    defense = models.IntegerField()
-    sp_attaque = models.IntegerField()
-    sp_defense = models.IntegerField()
-    speed = models.IntegerField()
-    recovery = models.IntegerField(default=1)
+    hp_max = models.IntegerField(default=0)
+    attaque = models.IntegerField(default=0)
+    defense = models.IntegerField(default=0)
+    sp_attaque = models.IntegerField(default=0)
+    sp_defense = models.IntegerField(default=0)
+    speed = models.IntegerField(default=0)
+    recovery = models.IntegerField(default=0)
+    Status = (
+        ('En combat', 'En combat'),
+        ('KO', 'KO'),
+        ('Mort', 'Mort'),
+    )
 
     def __str__(self):
         return f"{self.pokemon.nom} de {self.user.nom_utilisateur}"
