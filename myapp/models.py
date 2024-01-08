@@ -34,22 +34,30 @@ class User(models.Model):
 
 class PokemonInstance(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    surnom = models.CharField(max_length=100, blank=True)
     pokemon = models.ForeignKey(Pokemon, on_delete=models.CASCADE)
-    hp_max = models.IntegerField(default=0)
+    hp_max = models.IntegerField(default=0) # Santé maximale
+    hp = models.IntegerField(default=hp_max)      # Santé actuelle
     attaque = models.IntegerField(default=0)
     defense = models.IntegerField(default=0)
     sp_attaque = models.IntegerField(default=0)
     sp_defense = models.IntegerField(default=0)
     speed = models.IntegerField(default=0)
     recovery = models.IntegerField(default=0)
-    Status = (
+    status = models.CharField(max_length=50, choices=(
+        ('En repos', 'En repos'),
         ('En combat', 'En combat'),
         ('KO', 'KO'),
         ('Mort', 'Mort'),
-    )
+    ), default='En combat')
+
+    def save(self, *args, **kwargs):
+        if not self.surnom:
+            self.surnom = self.pokemon.nom  # Initialise avec le nom de l'espèce
+        super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.pokemon.nom} de {self.user.nom_utilisateur}"
+        return f"{self.surnom} de {self.user.nom_utilisateur}"
 
 
 
@@ -61,3 +69,17 @@ class Equipe(models.Model):
     def __str__(self):
         return self.nom
 
+class ObjetType(models.Model):
+    nom = models.CharField(max_length=100)
+    description = models.TextField()
+    
+    def __str__(self):
+        return self.nom
+    
+class Objet(models.Model):
+    type_objet = models.ForeignKey(ObjetType, on_delete=models.CASCADE, related_name='instances')
+    utilisateur = models.ForeignKey(User, on_delete=models.CASCADE, related_name='objets')
+    pokemon = models.OneToOneField(PokemonInstance, on_delete=models.SET_NULL, null=True, blank=True, related_name='objet')
+
+    def __str__(self):
+        return f"{self.type_objet.nom} de {self.utilisateur.nom_utilisateur}"
