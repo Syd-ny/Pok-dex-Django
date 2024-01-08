@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 import requests
-from myapp.models import Pokemon, Type, ObjetType
+from myapp.models import Pokemon, Type, ObjetType, BaieType
 
 class Command(BaseCommand):
     help = 'Fetches the first 151 Pokémon and items from PokéAPI'
@@ -8,6 +8,7 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         self.importer_pokemons()
         self.importer_objets_de_pokeapi()
+        self.importer_baies_de_pokeapi()
 
     def importer_pokemons(self, *args, **kwargs):
         base_url = "https://pokeapi.co/api/v2/pokemon/"
@@ -55,3 +56,14 @@ class Command(BaseCommand):
         else:
             print("Erreur lors de la récupération des données de PokéAPI")
 
+    def importer_baies_de_pokeapi(self, *args, **options):
+        url = "https://pokeapi.co/api/v2/berry"  # Remplacez par l'URL correcte si nécessaire
+        response = requests.get(url)
+        if response.status_code == 200:
+            data = response.json()
+            for item in data['results']:
+                nom_baie = item['name']
+                BaieType.objects.get_or_create(nom=nom_baie)
+                print(f"Ajouté : {nom_baie}")
+        else:
+            print("Erreur lors de la récupération des données de PokéAPI")

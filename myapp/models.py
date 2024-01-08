@@ -83,3 +83,18 @@ class Objet(models.Model):
 
     def __str__(self):
         return f"{self.type_objet.nom} de {self.utilisateur.nom_utilisateur}"
+    
+class BaieType(models.Model):
+    nom = models.CharField(max_length=100)
+    description = models.TextField()
+    
+    def __str__(self):
+        return self.nom
+    
+class Baie(models.Model):
+    type_baie = models.ForeignKey(BaieType, on_delete=models.CASCADE, related_name='instances')
+    utilisateur = models.ForeignKey(User, on_delete=models.CASCADE, related_name='baies')
+    pokemon = models.OneToOneField(PokemonInstance, on_delete=models.SET_NULL, null=True, blank=True, related_name='baie')
+
+    def __str__(self):
+        return f"{self.type_baie.nom} de {self.utilisateur.nom_utilisateur}"
