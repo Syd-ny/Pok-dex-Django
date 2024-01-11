@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <title>Title</title>
+</head>
+    <body>
+    <h1>Liste des Pokémon</h1>
+    <div class="pokemon-list">
+        {% for pokemon in pokemon_data %}
+            <div class="pokemon-card">
+                <img src="{{ pokemon.image }}" alt="{{ pokemon.nom }}">
+                <h3>{{ pokemon.nom }}</h3>
+                <p>Type: {{ pokemon.type1 }}</p>
+                <p>Type: {{ pokemon.type2 }}</p>
+                <a href="{% url 'pokemon_detail' pokemon.id %}">Voir les détails</a>
+            </div>
+        {% endfor %}
+    </div>
+    </body>
+</html>
