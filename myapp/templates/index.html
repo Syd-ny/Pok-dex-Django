@@ -6,13 +6,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <title>Title</title>
 </head>
 <body>
-    <h1>Liste des 151 premiers Pokémon</h1>
-    
-    <input type="text" id="searchInput" oninput="filterPokemonList()" placeholder="Rechercher un Pokémon...">
-
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">Pokédex</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <form class="form-inline my-2 my-lg-0 ml-auto">
+                    <input class="form-control mr-sm-2" type="text" id="searchInput" oninput="filterPokemonList()" placeholder="Rechercher un Pokémon...">
+                </form>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'affichage_equipe' %}">Afficher Équipe</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'ajout_equipe' %}">Ajouter Équipe</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
     <div class="pokemon-list">
         {% for pokemon in pokemon_data|slice:":151" %}
             <div class="pokemon-card">

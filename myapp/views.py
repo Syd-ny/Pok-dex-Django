@@ -3,6 +3,10 @@ from rest_framework import viewsets
 from .models import Pokemon
 from .serializers import PokemonSerializer
 
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
+from .models import Equipe
+
 # Create your views here.
 class PokemonViewSet(viewsets.ModelViewSet):
     queryset = Pokemon.objects.all()
@@ -41,28 +45,28 @@ def pokemon_detail(request, pokemon_id):
     # Passer le Pokémon et les informations sur le précédent et suivant au template
     return render(request, 'pokemon_detail.html', context)
 
-# myapp/views.py
 
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-from .models import Pokemon, Equipe
-
-@login_required
+@login_required(login_url='/accounts/login/')
 def ajout_equipe(request):
     if request.method == 'POST':
-        nom_equipe = request.POST['nom_equipe']
-        pokemons_ids = request.POST.getlist('pokemons')
+        # Récupérer l'utilisateur actuellement connecté
         dresseur = request.user
 
-        equipe = Equipe.objects.create(nom=nom_equipe, dresseur=dresseur)
-        equipe.pokemons.set(pokemons_ids)
+        # Créer une nouvelle équipe avec le dresseur approprié
+        nouvelle_equipe = Equipe.objects.create(
+            nom=request.POST['nom'],
+            dresseur=dresseur
+        )
+
+        # Ajouter les Pokémon à l'équipe (à compléter selon votre logique)
+        selected_pokemons = request.POST.getlist('pokemons')
+        nouvelle_equipe.pokemons.set(selected_pokemons)
 
         return redirect('affichage_equipe')
 
-    pokemons = Pokemon.objects.all()
-    return render(request, 'ajout_equipe.html', {'pokemons': pokemons})
+    return render(request, 'ajout_equipe.html')
 
-@login_required
+
 def affichage_equipe(request):
-    equipes = Equipe.objects.filter(dresseur=request.user)
+    equipes = Equipe.objects.filter()
     return render(request, 'affichage_equipe.html', {'equipes': equipes})
