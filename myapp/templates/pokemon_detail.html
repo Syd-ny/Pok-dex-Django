@@ -1,4 +1,3 @@
-
 <!-- pokemon_detail.html -->
 {% load static %}
 <!DOCTYPE html>
@@ -16,11 +15,18 @@
         <img src="{{ pokemon.image }}" alt="{{ pokemon.name }}">
     </div>
     <div class="pokemon-details-column">
+
+       <div class="pokemon-details-column">
         
         <h2>{{ pokemon.nom }}</h2>
-        <p>Type: {{ pokemon }}</p>
-        <p>Type: {{ pokemon.type2 }}</p>
-        <p>{{ pokemon.catchphrase }}</p>
+        <p><span class="icon">❤️</span> HP: {{ pokemon.hp_max }}</p>
+        <p><span class="icon">⚔️</span> Attack: {{ pokemon.attaque }}</p>
+        <p><span class="icon">🛡️</span> Defense: {{ pokemon.defense }}</p>
+        <p><span class="icon">💥</span> Special Attack: {{ pokemon.sp_attaque }}</p>
+        <p><span class="icon">🛡️</span> Special Defense: {{ pokemon.sp_defense }}</p>
+        <p><span class="icon">🏃</span> Speed: {{ pokemon.speed }}</p>
+    </div>
+        
     </div>
 </div>
 </body>
