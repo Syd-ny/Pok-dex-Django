@@ -71,5 +71,17 @@ p {
 }
 .icon {
     margin-right: 5px;
-    font-size: 20px;
+    font-size: 20px; /* Ajustez la taille de la police au besoin */
 }
+
+.arrow-button {
+    /* Ajoutez ici les styles communs aux deux types de boutons */
+    background-color: #3498db;
+    color: #ffffff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+

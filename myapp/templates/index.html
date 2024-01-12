@@ -9,12 +9,12 @@
     <title>Title</title>
 </head>
 <body>
-    <h1>Liste des Pokémon</h1>
+    <h1>Liste des 151 premiers Pokémon</h1>
     
     <input type="text" id="searchInput" oninput="filterPokemonList()" placeholder="Rechercher un Pokémon...">
 
     <div class="pokemon-list">
-        {% for pokemon in pokemon_data %}
+        {% for pokemon in pokemon_data|slice:":151" %}
             <div class="pokemon-card">
                 <img src="{{ pokemon.image }}" alt="{{ pokemon.nom }}">
                 <h3>{{ pokemon.nom }}</h3>

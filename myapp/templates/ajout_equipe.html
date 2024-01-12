@@ -1,0 +1,25 @@
+<!-- templates/ajout_equipe.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container mt-5">
+    <h2 class="mb-4">Ajouter une équipe</h2>
+    <form method="post" action="{% url 'ajout_equipe' %}">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="nom_equipe" class="form-label">Nom de l'équipe:</label>
+        <input type="text" class="form-control" name="nom_equipe" required>
+      </div>
+      <div class="mb-3">
+        <label for="pokemons" class="form-label">Pokémons:</label>
+        <select name="pokemons" class="form-select" multiple>
+          {% for pokemon in pokemons %}
+            <option value="{{ pokemon.id }}">{{ pokemon.nom }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Ajouter</button>
+    </form>
+  </div>
+{% endblock %}
