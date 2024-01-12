@@ -1,17 +1,27 @@
+
+<!-- pokemon_detail.html -->
+{% load static %}
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Title</title>
+    <title>Pokemon Detail</title>
+    <link rel="stylesheet" href="{% static 'css/pokemon_detail.css' %}">
 </head>
 <body>
-    <h1>Détails du Pokémon</h1>
-    <img src="{{ pokemon.image }}" alt="{{ pokemon.name }}">
-    <h2>{{ pokemon.nom }}</h2>
-    <p>Type: {{ pokemon }}</p>
-    <p>Type: {{ pokemon.type2 }}</p>
-    <p>{{ pokemon.catchphrase }}</p>
-    <!-- Ajoutez d'autres détails du Pokémon ici -->
+<button class="back-button" onclick="history.go(-1)">Back</button>
+<div class="pokemon-detail-container">
+    <div class="pokemon-image-column">
+        <img src="{{ pokemon.image }}" alt="{{ pokemon.name }}">
+    </div>
+    <div class="pokemon-details-column">
+        
+        <h2>{{ pokemon.nom }}</h2>
+        <p>Type: {{ pokemon }}</p>
+        <p>Type: {{ pokemon.type2 }}</p>
+        <p>{{ pokemon.catchphrase }}</p>
+    </div>
+</div>
 </body>
 </html>
