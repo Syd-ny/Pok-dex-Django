@@ -1,6 +1,6 @@
 .pokemon-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
     gap: 16px;
 }
 
@@ -26,4 +26,8 @@
 .pokemon-card a {
     display: block;
     margin-top: 10px;
+}
+
+.body {
+    color: #0065ba;
 }

@@ -10,6 +10,7 @@ class PokemonViewSet(viewsets.ModelViewSet):
 
 
 def pokemon_list(request):
+
     # Utilisez la classe PokemonViewSet pour récupérer la liste des Pokémon
     pokemon_viewset = PokemonViewSet()
     queryset = pokemon_viewset.get_queryset()
@@ -22,6 +23,7 @@ def pokemon_list(request):
     return render(request, 'index.html', {'pokemon_data': pokemon_data})
 
 def pokemon_detail(request, pokemon_id):
+
     # Récupérer le Pokémon en fonction de l'ID
     pokemon = Pokemon.objects.get(pk=pokemon_id)
 
