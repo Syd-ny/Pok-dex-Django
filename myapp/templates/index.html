@@ -1,3 +1,4 @@
+<!-- pokemon_list.html -->
 {% load static %}
 <!DOCTYPE html>
 <html lang="fr">
@@ -7,9 +8,11 @@
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
     <title>Title</title>
 </head>
-    <body>
-    
+<body>
     <h1>Liste des Pokémon</h1>
+    
+    <input type="text" id="searchInput" oninput="filterPokemonList()" placeholder="Rechercher un Pokémon...">
+
     <div class="pokemon-list">
         {% for pokemon in pokemon_data %}
             <div class="pokemon-card">
@@ -21,5 +24,23 @@
             </div>
         {% endfor %}
     </div>
-    </body>
+
+    <script>
+        function filterPokemonList() {
+            var input, filter, pokemonList, pokemonCard, name, i;
+            input = document.getElementById("searchInput");
+            filter = input.value.toUpperCase();
+            pokemonList = document.getElementsByClassName("pokemon-card");
+
+            for (i = 0; i < pokemonList.length; i++) {
+                name = pokemonList[i].getElementsByTagName("h3")[0];
+                if (name.innerText.toUpperCase().indexOf(filter) > -1) {
+                    pokemonList[i].style.display = "";
+                } else {
+                    pokemonList[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
 </html>
