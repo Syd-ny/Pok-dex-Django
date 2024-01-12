@@ -1,0 +1,17 @@
+<!-- templates/affichage_equipe.html -->
+
+
+{% block content %}
+  <div class="container mt-5">
+    <h2 class="mb-4">Mes équipes</h2>
+    {% if equipes %}
+      <ul class="list-group">
+        {% for equipe in equipes %}
+          <li class="list-group-item">{{ equipe.nom }} - {{ equipe.pokemons.all|join:", " }}</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>Vous n'avez pas encore créé d'équipe.</p>
+    {% endif %}
+  </div>
+{% endblock %}

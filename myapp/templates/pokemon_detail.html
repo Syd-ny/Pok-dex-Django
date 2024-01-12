@@ -1,0 +1,42 @@
+<!-- pokemon_detail.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/pokemon_detail.css' %}">
+    <title>{{ pokemon.nom }} - Détails</title>
+</head>
+<body>
+    <button class="back-button" onclick="window.location.href='{% url 'index'%}'">Retour</button>
+    <div class="pokemon-detail-container">
+        <div class="pokemon-navigation">
+            {% if previous_pokemon %}
+                <button class="arrow-button" onclick="window.location.href='{% url 'pokemon_detail' previous_pokemon.id %}'">Précédent</button>
+            {% else %}
+                <button class="arrow-button" disabled>Précédent</button>
+            {% endif %}
+        </div>
+        <div class="pokemon-image-column">
+            <img src="{{ pokemon.image }}" alt="{{ pokemon.nom }}">
+        </div>
+        <div class="pokemon-details-column">
+            <h2>{{ pokemon.nom }}</h2>
+            <p><span class="icon">❤️</span> HP: {{ pokemon.hp_max }}</p>
+            <p><span class="icon">⚔️</span> Attaque: {{ pokemon.attaque }}</p>
+            <p><span class="icon">🛡️</span> Défense: {{ pokemon.defense }}</p>
+            <p><span class="icon">💥</span> Attaque Spéciale: {{ pokemon.sp_attaque }}</p>
+            <p><span class="icon">🛡️</span> Défense Spéciale: {{ pokemon.sp_defense }}</p>
+            <p><span class="icon">🏃</span> Vitesse: {{ pokemon.speed }}</p>
+        </div>
+        <div class="pokemon-navigation">
+            {% if next_pokemon %}
+                <button class="arrow-button" onclick="window.location.href='{% url 'pokemon_detail' next_pokemon.id %}'">Suivant</button>
+            {% else %}
+                <button class="arrow-button" disabled>Suivant</button>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

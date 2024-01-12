@@ -1,0 +1,64 @@
+<!-- pokemon_list.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Title</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">Pokédex</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <form class="form-inline my-2 my-lg-0 ml-auto">
+                    <input class="form-control mr-sm-2" type="text" id="searchInput" oninput="filterPokemonList()" placeholder="Rechercher un Pokémon...">
+                </form>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'affichage_equipe' %}">Afficher Équipe</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'ajout_equipe' %}">Ajouter Équipe</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="pokemon-list">
+        {% for pokemon in pokemon_data|slice:":151" %}
+            <div class="pokemon-card">
+                <img src="{{ pokemon.image }}" alt="{{ pokemon.nom }}">
+                <h3>{{ pokemon.nom }}</h3>
+                <p>Type: {{ pokemon.type1 }}</p>
+                <p>Type: {{ pokemon.type2 }}</p>
+                <a href="{% url 'pokemon_detail' pokemon.id %}">Voir les détails</a>
+            </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        function filterPokemonList() {
+            var input, filter, pokemonList, pokemonCard, name, i;
+            input = document.getElementById("searchInput");
+            filter = input.value.toUpperCase();
+            pokemonList = document.getElementsByClassName("pokemon-card");
+
+            for (i = 0; i < pokemonList.length; i++) {
+                name = pokemonList[i].getElementsByTagName("h3")[0];
+                if (name.innerText.toUpperCase().indexOf(filter) > -1) {
+                    pokemonList[i].style.display = "";
+                } else {
+                    pokemonList[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
