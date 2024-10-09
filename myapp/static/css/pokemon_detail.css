@@ -1,0 +1,87 @@
+/* pokemon_detail.css */
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f5f5f5;
+}
+
+.back-button {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 10px;
+    align-self: flex-start; /* Aligne le bouton à gauche dans le flux vertical */
+}
+
+.pokemon-detail-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-grow: 1; /* Utilise tout l'espace disponible en bas */
+    max-width: 1200px;
+    width: 100%; /* Utilise toute la largeur disponible */
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.pokemon-image-column {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.pokemon-image {
+    width: 100%;
+    max-width: 100%;
+    max-height: 400px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.pokemon-details-column {
+    flex: 1;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+.icon {
+    margin-right: 5px;
+    font-size: 20px; /* Ajustez la taille de la police au besoin */
+}
+
+.arrow-button {
+    /* Ajoutez ici les styles communs aux deux types de boutons */
+    background-color: #3498db;
+    color: #ffffff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
